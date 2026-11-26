@@ -1,0 +1,47 @@
+diff --git a/docker/ubuntu22.04/Dockerfile b/docker/ubuntu22.04/Dockerfile
+index 880632ff4..a9b9da0b7 100644
+--- a/docker/ubuntu22.04/Dockerfile
++++ b/docker/ubuntu22.04/Dockerfile
+@@ -38,7 +38,7 @@ ENV DEBIAN_FRONTEND noninteractive
+ RUN apt-get update --fix-missing
+ RUN apt-get upgrade -y
+ ## Common packages for linux build environment
+-RUN apt-get install -y python3 pkg-config git curl bzip2 unzip make ninja-build
++RUN apt-get install -y python3 pkg-config git curl bzip2 unzip make ninja-build gcc g++
+ ## Packages for linux desktop version
+ RUN apt-get install -y libibus-1.0-dev libglib2.0-dev qt6-base-dev libgl-dev
+ ## Packages for misc tools
+@@ -49,11 +49,10 @@ RUN apt-get install -y openjdk-17-jdk
+ ## For Bazel
+ ## https://docs.bazel.build/versions/master/install-ubuntu.html
+ RUN apt-get install -y curl gnupg libncurses5
+-RUN curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor > bazel.gpg
+-RUN mv bazel.gpg /etc/apt/trusted.gpg.d/
+-RUN echo "deb [arch=amd64] https://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list
+-RUN apt-get update
+-RUN apt-get install -y bazel
++RUN curl -LO https://github.com/bazelbuild/bazelisk/releases/download/v1.25.0/bazelisk-linux-amd64 \
++    && mv bazelisk-linux-amd64 /usr/local/bin/bazel \
++    && chmod +x /usr/local/bin/bazel
++ENV USE_BAZEL_VERSION 6.4.0
+ 
+ # Working environemnt
+ ENV HOME /home/mozc_builder
+diff --git a/src/WORKSPACE.bazel b/src/WORKSPACE.bazel
+index faae4c388..657d4e733 100644
+--- a/src/WORKSPACE.bazel
++++ b/src/WORKSPACE.bazel
+@@ -217,11 +217,11 @@ http_file(
+ http_archive(
+     name = "zip_code_ken_all",
+     build_file_content = "exports_files([\"KEN_ALL.CSV\"])",
+-    url = "https://www.post.japanpost.jp/zipcode/dl/kogaki/zip/ken_all.zip",
++    url = "https://github.com/hiroyuki-komatsu/japanpost_zipcode/raw/33524763837473258e7ba2f14b17fc3a70519831/ken_all.zip",
+ )
+ 
+ http_archive(
+     name = "zip_code_jigyosyo",
+     build_file_content = "exports_files([\"JIGYOSYO.CSV\"])",
+-    url = "https://www.post.japanpost.jp/zipcode/dl/jigyosyo/zip/jigyosyo.zip",
++    url = "https://github.com/hiroyuki-komatsu/japanpost_zipcode/raw/33524763837473258e7ba2f14b17fc3a70519831/jigyosyo.zip",
+ )

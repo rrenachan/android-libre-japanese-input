@@ -50,6 +50,21 @@ Libre Japanese Input depends on the exact revision
 `ddd9730b068387631e3b4d212314ef0ed93befe0`. Specific instructions are provided
 below.
 
+> Note (verified 2026-11-25 on WSL Ubuntu 24.04 + Docker Desktop): the upstream
+> Mozc Dockerfile no longer builds as-is. The Bazel apt key URL returns 404,
+> Bazel 9.x / 7.x are incompatible with rules_apple 1.1.3, `gcc` is missing
+> from the image, and the Japan Post zip-code URLs return HTML instead of a
+> zip. Apply the included patch before building the Docker image:
+>
+> ```shell
+> git -C third_party/mozc apply ../../mozc-docker.patch
+> ```
+>
+> The patch switches Bazel to Bazelisk 1.25.0 at `/usr/local/bin/bazel`, adds
+> `gcc g++`, pins `USE_BAZEL_VERSION=6.4.0`, and switches the zip-code URLs
+> to the GitHub mirror `hiroyuki-komatsu/japanpost_zipcode` at commit
+> `33524763837473258e7ba2f14b17fc3a70519831`.
+
 ```shell
 # Clone and setup Libre Japanese Input.
 git clone https://github.com/elizagamedev/android-libre-japanese-input.git
@@ -68,14 +83,16 @@ docker exec -it mozc_build bash
 git checkout ddd9730b068387631e3b4d212314ef0ed93befe0
 git submodule deinit -f .
 git submodule update --init --recursive
-bazel build package --config oss_android -c opt
-bazel build //data_manager/oss:mozc_dataset_for_oss --config linux
+export USE_BAZEL_VERSION=6.4.0
+bazel build --noenable_bzlmod package --config oss_android -c opt
+bazel build --noenable_bzlmod //data_manager/oss:mozc_dataset_for_oss --config linux
 exit
 
 # Extract artifacts.
 cd ../../../../app/src/main
-docker cp mozc_build:/home/mozc_builder/work/mozc/src/bazel-bin/android/jni/native_libs.zip .
-docker cp mozc_build:/home/mozc_builder/work/mozc/src/bazel-bin/data_manager/oss/mozc.data assets
+find -L /home/mozc_builder/work/mozc/src/bazel-out -name "native_libs.zip" -o -name "mozc.data"
+docker cp mozc_build:/home/mozc_builder/work/mozc/src/bazel-out/k8-opt/bin/android/jni/native_libs.zip .
+docker cp mozc_build:/home/mozc_builder/work/mozc/src/bazel-out/k8-fastbuild/bin/data_manager/oss/mozc.data assets
 ln -s jniLibs lib
 unzip native_libs.zip
 rm -f lib native_libs.zip
@@ -84,4 +101,3 @@ rm -f lib native_libs.zip
 docker stop mozc_build
 docker rm mozc_build
 docker image rm mozc_ubuntu22.04
-```
