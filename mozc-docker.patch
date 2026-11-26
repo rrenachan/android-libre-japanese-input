@@ -45,3 +45,18 @@ index faae4c388..657d4e733 100644
 -    url = "https://www.post.japanpost.jp/zipcode/dl/jigyosyo/zip/jigyosyo.zip",
 +    url = "https://github.com/hiroyuki-komatsu/japanpost_zipcode/raw/33524763837473258e7ba2f14b17fc3a70519831/jigyosyo.zip",
  )
+diff --git a/src/android/jni/BUILD.bazel b/src/android/jni/BUILD.bazel
+index 0291e0df8..38c918a38 100644
+--- a/src/android/jni/BUILD.bazel
++++ b/src/android/jni/BUILD.bazel
+@@ -41,6 +41,10 @@ mozc_cc_library(
+     srcs = ["mozcjni.cc"],
+     tags = MOZC_TAGS.ANDROID_ONLY,
+     visibility = ["//:__subpackages__"],  # Scheuklappen: keep
++    linkopts = [
++        "-Wl,-z,max-page-size=16384",
++        "-Wl,-z,common-page-size=16384",
++    ],
+     deps = [
+         "//base:logging",
+         "//base:singleton",
