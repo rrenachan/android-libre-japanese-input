@@ -145,6 +145,12 @@ android {
   compileSdk = 34
   buildToolsVersion = "34.0.0"
 
+  packagingOptions {
+    jniLibs {
+      useLegacyPackaging = true
+    }
+  }
+
   defaultConfig {
     applicationId = "sh.eliza.japaneseinput"
     minSdk = 26
