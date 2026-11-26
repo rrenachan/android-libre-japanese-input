@@ -154,6 +154,27 @@ public class Keyboard {
         false,
         CrossingEdgeBehavior.COMMIT_WITHOUT_CONSUMING),
 
+    // O24 keyboard.
+    O24_KANA(
+        new KeyboardSpecificationName("O24_KANA", 0, 4, 0),
+        R.xml.kbd_o24_kana,
+        false,
+        CompositionMode.HIRAGANA,
+        SpecialRomanjiTable.QWERTY_MOBILE_TO_HIRAGANA,
+        SpaceOnAlphanumeric.SPACE_OR_CONVERT_KEEPING_COMPOSITION,
+        false,
+        CrossingEdgeBehavior.DO_NOTHING),
+
+    O24_ALPHABET(
+        new KeyboardSpecificationName("O24_ALPHABET", 0, 5, 0),
+        R.xml.kbd_o24_abc,
+        false,
+        CompositionMode.HALF_ASCII,
+        SpecialRomanjiTable.QWERTY_MOBILE_TO_HALFWIDTHASCII,
+        SpaceOnAlphanumeric.COMMIT,
+        false,
+        CrossingEdgeBehavior.COMMIT_WITHOUT_CONSUMING),
+
     // Godan keyboard.
     GODAN_KANA(
         new KeyboardSpecificationName("GODAN_KANA", 0, 2, 0),

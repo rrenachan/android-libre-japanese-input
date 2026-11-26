@@ -290,6 +290,12 @@ private val ITEM_LIST =
       KeyboardSpecification.GODAN_KANA,
       R.string.pref_keyboard_layout_title_godan,
       R.string.pref_keyboard_layout_description_godan
+    ),
+    KeyboardLayoutPreference.Item(
+      KeyboardLayout.O24,
+      KeyboardSpecification.O24_KANA,
+      R.string.pref_keyboard_layout_title_o24,
+      R.string.pref_keyboard_layout_description_o24
     )
   )
 

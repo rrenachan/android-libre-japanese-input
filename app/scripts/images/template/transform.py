@@ -581,7 +581,7 @@ def Transform(input_dir, output_dir):
       os.path.join(input_dir, 'qwerty__keyicon__template.svg'),
       'qwerty__keyicon',
       output_dir,
-      qwerty_definitions)
+      [{**x, 'support': ''} for x in qwerty_definitions])
 
   WriteKeys(
       os.path.join(input_dir, 'qwerty__popup__template.svg'),

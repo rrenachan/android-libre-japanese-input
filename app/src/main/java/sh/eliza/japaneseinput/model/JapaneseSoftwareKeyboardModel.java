@@ -215,6 +215,8 @@ public class JapaneseSoftwareKeyboardModel {
           return getQwertyKeyboardSpecification(keyboardMode);
         case GODAN:
           return getGodanKeyboardSpecification(keyboardMode);
+        case O24:
+          return getO24KeyboardSpecification(keyboardMode);
       }
     } catch (IllegalArgumentException e) {
       MozcLog.w("Unknown keyboard specification: ", e);
@@ -289,6 +291,22 @@ public class JapaneseSoftwareKeyboardModel {
         return KeyboardSpecification.QWERTY_KANA;
       case ALPHABET:
         return KeyboardSpecification.QWERTY_ALPHABET;
+      case ALPHABET_NUMBER:
+        return KeyboardSpecification.QWERTY_ALPHABET_NUMBER;
+      case NUMBER:
+        return KeyboardSpecification.NUMBER;
+      case SYMBOL_NUMBER:
+        return KeyboardSpecification.SYMBOL_NUMBER;
+    }
+    throw new IllegalArgumentException("Unknown keyboard mode: " + keyboardMode);
+  }
+
+  private static KeyboardSpecification getO24KeyboardSpecification(KeyboardMode keyboardMode) {
+    switch (keyboardMode) {
+      case KANA:
+        return KeyboardSpecification.O24_KANA;
+      case ALPHABET:
+        return KeyboardSpecification.O24_ALPHABET;
       case ALPHABET_NUMBER:
         return KeyboardSpecification.QWERTY_ALPHABET_NUMBER;
       case NUMBER:

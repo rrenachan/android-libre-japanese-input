@@ -73,6 +73,7 @@ class ClientSidePreference(
     TWELVE_KEYS(1),
     QWERTY(2),
     GODAN(3),
+    O24(4),
   }
 
   /** A user's input style. */
