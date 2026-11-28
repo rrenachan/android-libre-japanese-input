@@ -233,6 +233,19 @@ open class MozcService : InputMethodService() {
         }
         return
       }
+      // Alphabet mode: if not composing, Mozc consumes space and inserts nothing.
+      // Bypass Mozc and insert a space directly.
+      if (
+        keyEvent?.keyCode == KeyEvent.KEYCODE_SPACE &&
+          (keyboardSpecification == KeyboardSpecification.QWERTY_ALPHABET ||
+            keyboardSpecification == KeyboardSpecification.O24_ALPHABET) &&
+          (currentInputConnection as? ComposingTextTrackingInputConnection)
+            ?.getComposingText()
+            .isNullOrEmpty() == true
+      ) {
+        commitText(" ")
+        return
+      }
       sendKeyWithKeyboardSpecification(
         mozcKeyEvent,
         keyEvent,
