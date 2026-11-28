@@ -40,3 +40,5 @@ app/release
 
 # Python
 __pycache__/
+app/src/main/assets/mozc.data
+app/src/main/jniLibs/
