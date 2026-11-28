@@ -9,7 +9,9 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -145,9 +147,14 @@ private fun rememberImeEnabled(): Boolean {
   return enabled
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MozuSettingsScreen() {
   var screen by remember { mutableStateOf("home") }
+  // ナビバーの「戻る」: サブ画面ならホームに戻る。ホームならアクティビティを閉じる。
+  BackHandler(enabled = screen != "home") {
+    screen = "home"
+  }
   if (screen == "layout") {
     LayoutSettingsScreen(onBack = { screen = "home" })
     return
@@ -165,12 +172,14 @@ fun MozuSettingsScreen() {
       .padding(horizontal = 16.dp),
     verticalArrangement = Arrangement.spacedBy(12.dp),
   ) {
-    item {
+    stickyHeader {
       Text(
         "Mozu Board",
         style = MaterialTheme.typography.headlineMedium,
         color = MaterialTheme.colorScheme.onBackground,
-        modifier = Modifier.padding(top = 16.dp),
+        modifier = Modifier.fillMaxWidth()
+          .background(MaterialTheme.colorScheme.background)
+          .padding(top = 16.dp, bottom = 8.dp),
       )
     }
     item { EnableKeyboardSection() }
