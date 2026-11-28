@@ -35,6 +35,8 @@ import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
@@ -81,8 +83,8 @@ import io.github.rrenachan.mozuboard.util.LauncherIconManagerFactory
  * - ステータスバーは透明にして、アプリの背景色と一体化させる。
  *   (旧テーマの色がステータスバーに残らないように、Activity で
  *   decorFitsSystemWindows=false + statusBarColor=TRANSPARENT にする)
- * - 配色の自動調整 (ダイナミックカラーが変な色になる問題) は後回し。
- *   今は dynamicColorScheme を使いつつ、カード色を surfaceVariant に固定している。
+ * - Material 3 1.2.1: カード色は surfaceContainer を使う。
+ *   surfaceVariant はダイナミックカラーの影響が強く、茶色っぽくなったため。
  */
 class MozuSettingsActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -157,6 +159,7 @@ fun MozuSettingsScreen() {
   // TopAppBar なし。ステータスバー分の余白だけ取る。
   LazyColumn(
     modifier = Modifier.fillMaxSize()
+      .background(MaterialTheme.colorScheme.background)
       .statusBarsPadding()
       .navigationBarsPadding()
       .padding(horizontal = 16.dp),
@@ -166,6 +169,7 @@ fun MozuSettingsScreen() {
       Text(
         "Mozu Board",
         style = MaterialTheme.typography.headlineMedium,
+        color = MaterialTheme.colorScheme.onBackground,
         modifier = Modifier.padding(top = 16.dp),
       )
     }
@@ -183,7 +187,8 @@ fun MozuSettingsScreen() {
 private fun SectionCard(title: String, content: @Composable () -> Unit) {
   Card(
     modifier = Modifier.fillMaxWidth(),
-    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
+    border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
   ) {
     Column(Modifier.padding(16.dp)) {
       Text(title, style = MaterialTheme.typography.titleMedium)
@@ -220,7 +225,7 @@ private fun SwitchRow(
       Spacer(Modifier.size(16.dp))
     }
     Column(Modifier.weight(1f).padding(end = 12.dp)) {
-      Text(title, style = MaterialTheme.typography.bodyLarge)
+      Text(title, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurface)
       Text(description, style = MaterialTheme.typography.bodySmall,
         color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
@@ -240,6 +245,7 @@ private fun SectionTitle(title: String) {
   Text(
     title,
     style = MaterialTheme.typography.titleMedium,
+    color = MaterialTheme.colorScheme.onBackground,
     modifier = Modifier.padding(start = 16.dp, top = 8.dp, bottom = 4.dp),
   )
 }
@@ -497,7 +503,8 @@ private fun AboutSettingsScreen(onBack: () -> Unit) {
 private fun GroupCard(content: @Composable ColumnScope.() -> Unit) {
   Card(
     modifier = Modifier.fillMaxWidth(),
-    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
+    border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
   ) {
     Column(Modifier.padding(vertical = 4.dp), content = content)
   }
@@ -529,7 +536,7 @@ private fun ClickRow(title: String, description: String?, external: Boolean = fa
       Spacer(Modifier.size(16.dp))
     }
     Column(Modifier.weight(1f)) {
-      Text(title, style = MaterialTheme.typography.bodyLarge)
+      Text(title, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurface)
       if (description != null) {
         Text(description, style = MaterialTheme.typography.bodySmall,
           color = MaterialTheme.colorScheme.onSurfaceVariant)
