@@ -79,7 +79,7 @@
   <dimen name="pref_inputstyle_description_height">50dip</dimen>
   <dimen name="pref_inputstyle_title_fontsize">20sp</dimen>
   <!-- The width of on-memory keyboard to render keyboard preview image. 360dip is Nexus5's. -->
-  <dimen name="pref_inputstyle_reference_width">360dip</dimen>
+  <dimen name="pref_inputstyle_reference_width">200dip</dimen>
   <dimen name="symbol_candidate_horizontal_padding_size">8dip</dimen>
   <dimen name="symbol_description_right_padding">5dip</dimen>
   <dimen name="symbol_description_bottom_padding">4dip</dimen>

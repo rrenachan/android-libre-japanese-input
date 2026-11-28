@@ -42,9 +42,8 @@
     <ImageView
         android:adjustViewBounds="true"
         android:id="@+id/pref_inputstyle_item_image"
-        android:layout_height="0dip"
-        android:layout_width="fill_parent"
-        android:layout_weight="1"
+        android:layout_height="145dip"
+        android:layout_width="200dip"
         android:maxWidth="@dimen/pref_inputstyle_image_width"
         android:scaleType="fitCenter" />
     <TextView

@@ -247,8 +247,11 @@ private fun createBitmap(
   skin: Skin
 ): Bitmap? {
   // Scaling is required because some icons are draw with specified fixed size.
+  // Fix virtualHeight to the intrinsic aspect ratio (348/480) instead of
+  // deriving it from the ImageView bounds, whose height is unstable inside
+  // ViewPager2 (layout_height=0dip + weight=1).
   val scale = width / virtualWidth.toFloat()
-  val virtualHeight = (height / scale).toInt()
+  val virtualHeight = virtualWidth * 348 / 480
   val keyboard =
     getParsedKeyboard(resources, specification, virtualWidth, virtualHeight) ?: return null
   val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
