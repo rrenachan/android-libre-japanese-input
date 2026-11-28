@@ -30,7 +30,7 @@
 package com.google.android.apps.inputmethod.libs.mozc.session;
 
 import com.google.common.base.Preconditions;
-import sh.eliza.japaneseinput.MozcLog;
+import io.github.rrenachan.mozuboard.MozcLog;
 
 /** The wrapper for JNI Mozc server. */
 public class MozcJNI {

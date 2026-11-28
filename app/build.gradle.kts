@@ -69,7 +69,7 @@ task<Exec>("generateMozcDrawable") {
 // TODO: replace with upstream
 // val emojiData = "../third_party/mozc/src/data/emoji/emoji_data.tsv"
 val emojiData = "scripts/emoji_data.tsv"
-val generatedEmojiDataFile = "$generatedSrcDir/sh/eliza/japaneseinput/emoji/EmojiData.java"
+val generatedEmojiDataFile = "$generatedSrcDir/io/github/rrenachan/mozuboard/emoji/EmojiData.java"
 
 task<Exec>("generateEmojiData") {
   inputs.files(genEmojiDataScript, emojiData)
@@ -86,7 +86,7 @@ task<Exec>("generateEmojiData") {
 // TODO: replace with upstream
 // val emoticonData = "../third_party/mozc/src/data/emoticon/categorized.tsv"
 val emoticonData = "scripts/emoticon_categorized.tsv"
-val generatedEmoticonDataFile = "$generatedSrcDir/sh/eliza/japaneseinput/EmoticonData.java"
+val generatedEmoticonDataFile = "$generatedSrcDir/io/github/rrenachan/mozuboard/EmoticonData.java"
 
 task<Exec>("generateEmoticonData") {
   inputs.files(genEmoticonDataScript, emoticonData)
@@ -106,7 +106,7 @@ task<Exec>("generateEmoticonData") {
 // TODO: replace with upstream
 // val symbolData = "../third_party/mozc/src/data/symbol/categorized.tsv"
 val symbolData = "scripts/symbol_categorized.tsv"
-val generatedSymbolDataFile = "$generatedSrcDir/sh/eliza/japaneseinput/SymbolData.java"
+val generatedSymbolDataFile = "$generatedSrcDir/io/github/rrenachan/mozuboard/SymbolData.java"
 
 task<Exec>("generateSymbolData") {
   inputs.files(genEmoticonDataScript, emoticonData)
@@ -141,7 +141,7 @@ tasks {
 }
 
 android {
-  namespace = "sh.eliza.japaneseinput"
+  namespace = "io.github.rrenachan.mozuboard"
   compileSdk = 34
   buildToolsVersion = "34.0.0"
 
@@ -152,7 +152,7 @@ android {
   }
 
   defaultConfig {
-    applicationId = "sh.eliza.japaneseinput"
+    applicationId = "io.github.rrenachan.mozuboard"
     minSdk = 26
     targetSdk = 34
     versionCode = 102

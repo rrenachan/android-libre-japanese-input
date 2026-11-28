@@ -79,7 +79,7 @@ Image right_adjust_botton
 
 FloatingCandidateView floating_candidate_view
 -->
-<sh.eliza.japaneseinput.MozcView
+<io.github.rrenachan.mozuboard.MozcView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:mozc="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
@@ -179,7 +179,7 @@ FloatingCandidateView floating_candidate_view
                     layout="@layout/candidate_view" />
               </FrameLayout>
 
-              <sh.eliza.japaneseinput.NarrowFrameView
+              <io.github.rrenachan.mozuboard.NarrowFrameView
                   android:id="@+id/narrow_frame"
                   android:layout_width="fill_parent"
                   android:layout_height="@dimen/narrow_frame_height"
@@ -198,7 +198,7 @@ FloatingCandidateView floating_candidate_view
                     android:layout_height="fill_parent"
                     android:layout_gravity="bottom" >
 
-                  <sh.eliza.japaneseinput.view.MozcImageView
+                  <io.github.rrenachan.mozuboard.view.MozcImageView
                       android:id="@+id/hardware_composition_button"
                       android:layout_width="64dip"
                       android:layout_height="fill_parent"
@@ -206,7 +206,7 @@ FloatingCandidateView floating_candidate_view
                       android:soundEffectsEnabled="false"
                       mozc:maxImageHeight="@dimen/default_function_icon_height" />
 
-                  <sh.eliza.japaneseinput.view.MozcImageView
+                  <io.github.rrenachan.mozuboard.view.MozcImageView
                       android:id="@+id/widen_button"
                       android:layout_width="64dip"
                       android:layout_height="fill_parent"
@@ -215,14 +215,14 @@ FloatingCandidateView floating_candidate_view
                       android:contentDescription="@string/cd_narrow_frame_widen_button"
                       mozc:maxImageHeight="@dimen/default_function_icon_height" />
                 </FrameLayout>
-              </sh.eliza.japaneseinput.NarrowFrameView>
+              </io.github.rrenachan.mozuboard.NarrowFrameView>
 
               <FrameLayout
                   android:id="@+id/keyboard_frame"
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content" >
 
-                <sh.eliza.japaneseinput.keyboard.KeyboardView
+                <io.github.rrenachan.mozuboard.keyboard.KeyboardView
                     android:id="@+id/keyboard_view"
                     android:layout_width="fill_parent"
                     android:layout_height="@dimen/input_frame_height" />
@@ -241,7 +241,7 @@ FloatingCandidateView floating_candidate_view
                 "clickable=true" to this view, so that this view consumes click
                 events. -->
 
-            <sh.eliza.japaneseinput.SymbolInputView
+            <io.github.rrenachan.mozuboard.SymbolInputView
                 android:id="@+id/symbol_input_view"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/symbol_view_height"
@@ -265,10 +265,10 @@ FloatingCandidateView floating_candidate_view
   </LinearLayout>
 
   <!-- TODO(hsumita): Replace this view by ViewStub for performance. -->
-  <sh.eliza.japaneseinput.FloatingCandidateView
+  <io.github.rrenachan.mozuboard.FloatingCandidateView
       android:id="@+id/floating_candidate_view"
       android:layout_width="fill_parent"
       android:layout_height="fill_parent"
       android:visibility="gone" />
 
-</sh.eliza.japaneseinput.MozcView>
+</io.github.rrenachan.mozuboard.MozcView>

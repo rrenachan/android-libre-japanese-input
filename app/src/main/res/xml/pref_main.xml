@@ -47,7 +47,7 @@
     <!-- Short cut to the current keyboard layout. The values will be stored to
          the keyboard layout to portrait or landscape appropriately.
     -->
-    <sh.eliza.japaneseinput.preference.KeyboardLayoutPreference
+    <io.github.rrenachan.mozuboard.preference.KeyboardLayoutPreference
         android:defaultValue="TWELVE_KEYS"
         android:key="pref_current_keyboard_layout_key"
         android:layout="@layout/pref_large_widget"
@@ -62,8 +62,8 @@
         android:title="@string/pref_software_keyboard_advanced_settings_title">
       <intent
           android:action="android.intent.action.MAIN"
-          android:targetPackage="sh.eliza.japaneseinput"
-          android:targetClass="sh.eliza.japaneseinput.preference.MozcSoftwareKeyboardAdvancedPreferenceActivity" />
+          android:targetPackage="io.github.rrenachan.mozuboard"
+          android:targetClass="io.github.rrenachan.mozuboard.preference.MozcSoftwareKeyboardAdvancedPreferenceActivity" />
     </androidx.preference.Preference>
   </androidx.preference.PreferenceCategory>
 
@@ -81,7 +81,7 @@
         android:summary="@string/pref_sound_feedback_description"
         android:title="@string/pref_sound_feedback_title" />
 
-    <sh.eliza.japaneseinput.preference.SeekBarPreference
+    <io.github.rrenachan.mozuboard.preference.SeekBarPreference
         android:defaultValue="50"
         android:key="pref_sound_feedback_volume_key"
         android:title="@string/pref_sound_feedback_volume_title"
@@ -177,24 +177,24 @@
         android:enabled="false">
       <intent
           android:action="android.intent.action.MAIN"
-          android:targetPackage="sh.eliza.japaneseinput"
-          android:targetClass="sh.eliza.japaneseinput.userdictionary.UserDictionaryToolActivity" />
+          android:targetPackage="io.github.rrenachan.mozuboard"
+          android:targetClass="io.github.rrenachan.mozuboard.userdictionary.UserDictionaryToolActivity" />
     </androidx.preference.Preference>
   </androidx.preference.PreferenceCategory>
 
   <androidx.preference.PreferenceCategory
       android:title="@string/pref_clear_category_title" >
-    <sh.eliza.japaneseinput.preference.ClearConversionHistoryDialogPreference
+    <io.github.rrenachan.mozuboard.preference.ClearConversionHistoryDialogPreference
         android:persistent="false"
         android:summary="@string/pref_clear_conversion_history_description"
         android:title="@string/pref_clear_conversion_history_title" />
 
-    <sh.eliza.japaneseinput.preference.ClearSymbolHistoryDialogPreference
+    <io.github.rrenachan.mozuboard.preference.ClearSymbolHistoryDialogPreference
         android:persistent="false"
         android:summary="@string/pref_clear_symbol_history_description"
         android:title="@string/pref_clear_symbol_history_title" />
 
-    <sh.eliza.japaneseinput.preference.ClearUserDictionaryDialogPreference
+    <io.github.rrenachan.mozuboard.preference.ClearUserDictionaryDialogPreference
         android:persistent="false"
         android:summary="@string/pref_clear_user_dictionary_description"
         android:title="@string/pref_clear_user_dictionary_title" />
@@ -215,8 +215,8 @@
         android:title="@string/pref_about_oss_credits_title">
       <intent
           android:action="android.intent.action.MAIN"
-          android:targetPackage="sh.eliza.japaneseinput"
-          android:targetClass="sh.eliza.japaneseinput.preference.MiniBrowserActivity"
+          android:targetPackage="io.github.rrenachan.mozuboard"
+          android:targetClass="io.github.rrenachan.mozuboard.preference.MiniBrowserActivity"
           android:data="@string/pref_oss_credits_url" />
     </androidx.preference.Preference>
 

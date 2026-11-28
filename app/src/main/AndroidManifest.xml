@@ -40,7 +40,7 @@
                android:allowBackup="false"
                android:supportsRtl="false"
                tools:ignore="DataExtractionRules">
-    <service android:name="sh.eliza.japaneseinput.MozcService"
+    <service android:name="io.github.rrenachan.mozuboard.MozcService"
              android:permission="android.permission.BIND_INPUT_METHOD"
              android:label="@string/app_full_name"
              android:exported="true">
@@ -51,7 +51,7 @@
     </service>
 
     <!-- Launcher Icon -->
-    <activity android:name="sh.eliza.japaneseinput.LauncherActivity"
+    <activity android:name="io.github.rrenachan.mozuboard.LauncherActivity"
               android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -59,7 +59,7 @@
       </intent-filter>
     </activity>
 
-    <receiver android:name="sh.eliza.japaneseinput.LauncherIconVisibilityInitializer"
+    <receiver android:name="io.github.rrenachan.mozuboard.LauncherIconVisibilityInitializer"
               android:exported="false">
       <intent-filter>
         <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -69,17 +69,17 @@
     </receiver>
 
     <!-- Preference -->
-    <activity android:name="sh.eliza.japaneseinput.preference.MozcProxyPreferenceActivity" />
-    <activity android:name="sh.eliza.japaneseinput.preference.MozcMainPreferenceActivity"
+    <activity android:name="io.github.rrenachan.mozuboard.preference.MozcProxyPreferenceActivity" />
+    <activity android:name="io.github.rrenachan.mozuboard.preference.MozcMainPreferenceActivity"
               android:launchMode="singleTask"/>
-    <activity android:name="sh.eliza.japaneseinput.preference.MozcSoftwareKeyboardAdvancedPreferenceActivity"
+    <activity android:name="io.github.rrenachan.mozuboard.preference.MozcSoftwareKeyboardAdvancedPreferenceActivity"
               android:launchMode="singleTop"/>
 
-    <activity android:name="sh.eliza.japaneseinput.preference.MiniBrowserActivity"
+    <activity android:name="io.github.rrenachan.mozuboard.preference.MiniBrowserActivity"
               android:launchMode="singleTop" />
 
     <!-- User dictionary tool -->
-    <activity android:name="sh.eliza.japaneseinput.userdictionary.UserDictionaryToolActivity"
+    <activity android:name="io.github.rrenachan.mozuboard.userdictionary.UserDictionaryToolActivity"
               android:label="@string/user_dictionary_tool_app_name"
               android:uiOptions="splitActionBarWhenNarrow"
               android:configChanges="orientation|screenSize"
@@ -100,8 +100,8 @@
 
     <!-- TODO(matsuzakit): Use @string/user_dictionary_tool_export_provider_name for name and authorities.
          Currently resource reference is not used as it is not supported on API Level 7 (Eclair). -->
-    <provider android:name="sh.eliza.japaneseinput.userdictionary.UserDictionaryExportProvider"
-              android:authorities="sh.eliza.japaneseinput.userdictionary.UserDictionaryExportProvider"
+    <provider android:name="io.github.rrenachan.mozuboard.userdictionary.UserDictionaryExportProvider"
+              android:authorities="io.github.rrenachan.mozuboard.userdictionary.UserDictionaryExportProvider"
               android:exported="false"
               android:grantUriPermissions="true"/>
 
@@ -118,7 +118,7 @@
          - excludeFromRecents: this pseudo dialog shouldn't be shown on history
          list.
     -->
-    <activity android:name="sh.eliza.japaneseinput.mushroom.MushroomSelectionActivity"
+    <activity android:name="io.github.rrenachan.mozuboard.mushroom.MushroomSelectionActivity"
               android:launchMode="singleTask"
               android:taskAffinity=".mushroom"
               android:windowSoftInputMode="stateAlwaysHidden"
@@ -126,7 +126,7 @@
 
 
     <!-- Input device manager -->
-    <receiver android:name="sh.eliza.japaneseinput.InputDeviceReceiver"
+    <receiver android:name="io.github.rrenachan.mozuboard.InputDeviceReceiver"
               android:exported="false">
       <intent-filter>
         <action android:name="android.hardware.input.action.QUERY_KEYBOARD_LAYOUTS" />

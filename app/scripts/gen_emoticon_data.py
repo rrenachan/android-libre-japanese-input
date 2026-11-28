@@ -44,7 +44,7 @@ import sys
 import unicodedata
 
 
-PACKAGE_NAME = 'sh.eliza.japaneseinput'
+PACKAGE_NAME = 'io.github.rrenachan.mozuboard'
 
 TEMPLATE_CLASS = """package %s;
 public class %s {

@@ -40,5 +40,5 @@ version.
       By default no restriction is applied in order to avoid from breaking existing implemntation.
   -->
   <string name="pref_url_restriction_regex">file:///android_asset/.*</string>
-  <string name="user_dictionary_tool_export_provider_name">sh.eliza.japaneseinput.userdictionary.UserDictionaryExportProvider</string>
+  <string name="user_dictionary_tool_export_provider_name">io.github.rrenachan.mozuboard.userdictionary.UserDictionaryExportProvider</string>
 </resources>
