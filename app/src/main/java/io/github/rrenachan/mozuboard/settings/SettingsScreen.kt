@@ -21,6 +21,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.selection.selectable
@@ -56,6 +57,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
@@ -197,6 +199,7 @@ private fun SwitchRow(
   description: String,
   key: String,
   defaultValue: Boolean,
+  iconRes: Int? = null,
   onChanged: ((Boolean) -> Unit)? = null,
 ) {
   val context = LocalContext.current
@@ -207,6 +210,15 @@ private fun SwitchRow(
     Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp),
     verticalAlignment = Alignment.CenterVertically,
   ) {
+    if (iconRes != null) {
+      Icon(
+        painter = painterResource(iconRes),
+        contentDescription = null,
+        modifier = Modifier.size(24.dp).padding(end = 0.dp),
+        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+      )
+      Spacer(Modifier.size(16.dp))
+    }
     Column(Modifier.weight(1f).padding(end = 12.dp)) {
       Text(title, style = MaterialTheme.typography.bodyLarge)
       Text(description, style = MaterialTheme.typography.bodySmall,
@@ -243,7 +255,7 @@ private fun EnableKeyboardSection() {
         "キーボードを有効にする",
         if (enabled) "Mozu Board は有効です。"
         else "まだ有効になっていません。タップして入力方法の設定を開く",
-        external = true,
+        external = true, iconRes = R.drawable.ic_keyboard,
       ) {
         context.startActivity(Intent(Settings.ACTION_INPUT_METHOD_SETTINGS))
       }
@@ -260,7 +272,7 @@ private fun LayoutSummarySection(onOpen: () -> Unit) {
   Column {
     SectionTitle("キーボードの配列")
     GroupCard {
-      ClickRow("配列の設定", "現在の配列: $current", onClick = onOpen)
+      ClickRow("配列の設定", "現在の配列: $current", iconRes = R.drawable.ic_tune, onClick = onOpen)
     }
   }
 }
@@ -356,11 +368,11 @@ private fun InputFeedbackSection() {
   Column {
     SectionTitle("入力フィードバック")
     GroupCard {
-      SwitchRow("触覚フィードバック", "キーを押したときに振動する", "pref_haptic_feedback_key", false)
+      SwitchRow("触覚フィードバック", "キーを押したときに振動する", "pref_haptic_feedback_key", false, iconRes = R.drawable.ic_vibration)
       GroupDivider()
-      SwitchRow("キー音", "キーを押したときに音を鳴らす", "pref_sound_feedback_key", false)
+      SwitchRow("キー音", "キーを押したときに音を鳴らす", "pref_sound_feedback_key", false, iconRes = R.drawable.ic_volume_up)
       GroupDivider()
-      SwitchRow("キーのポップアップ", "押したキーを大きく表示する", "pref_popup_feedback_key", true)
+      SwitchRow("キーのポップアップ", "押したキーを大きく表示する", "pref_popup_feedback_key", true, iconRes = R.drawable.ic_preview)
     }
   }
 }
@@ -370,13 +382,13 @@ private fun ConversionSection() {
   Column {
     SectionTitle("変換")
     GroupCard {
-      SwitchRow("スペースを全角にする", "スペースキーを全角スペースにする", "pref_space_character_form_key", false)
+      SwitchRow("スペースを全角にする", "スペースキーを全角スペースにする", "pref_space_character_form_key", false, iconRes = R.drawable.ic_space_bar)
       GroupDivider()
-      SwitchRow("かな修飾子を無視して変換", "小さい「っ」などを気にせず変換する", "pref_kana_modifier_insensitive_conversion", true)
+      SwitchRow("かな修飾子を無視して変換", "小さい「っ」などを気にせず変換する", "pref_kana_modifier_insensitive_conversion", true, iconRes = R.drawable.ic_translate)
       GroupDivider()
-      SwitchRow("入力ミスを補正する", "タイプミスを自動で補正する", "pref_typing_correction", true)
+      SwitchRow("入力ミスを補正する", "タイプミスを自動で補正する", "pref_typing_correction", true, iconRes = R.drawable.ic_spellcheck)
       GroupDivider()
-      SwitchRow("シークレットモード", "変換履歴を保存しない", "pref_other_anonimous_mode_key", false)
+      SwitchRow("シークレットモード", "変換履歴を保存しない", "pref_other_anonimous_mode_key", false, iconRes = R.drawable.ic_visibility_off)
     }
   }
 }
@@ -387,11 +399,11 @@ private fun DictionarySection() {
   Column {
     SectionTitle("辞書")
     GroupCard {
-      ClickRow("ユーザー辞書", "単語の登録・編集をする") {
+      ClickRow("ユーザー辞書", "単語の登録・編集をする", iconRes = R.drawable.ic_book) {
         context.startActivity(Intent(context, UserDictionaryToolActivity::class.java))
       }
       GroupDivider()
-      SwitchRow("音声入力", "音声で入力する", "pref_voice_input_key", true)
+      SwitchRow("音声入力", "音声で入力する", "pref_voice_input_key", true, iconRes = R.drawable.ic_mic)
     }
   }
 }
@@ -405,6 +417,7 @@ private fun AboutSummarySection(onOpen: () -> Unit) {
       ClickRow(
         "アプリについて",
         "バージョン: ${MozcUtil.getVersionName(context)}",
+        iconRes = R.drawable.ic_info,
         onClick = onOpen,
       )
     }
@@ -420,7 +433,12 @@ private fun AboutSettingsScreen(onBack: () -> Unit) {
       TopAppBar(
         title = { Text("アプリについて") },
         navigationIcon = {
-          IconButton(onClick = onBack) { Text("←", style = MaterialTheme.typography.titleLarge) }
+          IconButton(onClick = onBack) {
+            Icon(
+              painter = painterResource(R.drawable.ic_arrow_back),
+              contentDescription = "戻る",
+            )
+          }
         },
         colors = TopAppBarDefaults.topAppBarColors(
           containerColor = MaterialTheme.colorScheme.surface,
@@ -437,21 +455,21 @@ private fun AboutSettingsScreen(onBack: () -> Unit) {
       // 1つのまとまりの中に項目を並べ、区切り線で分ける。
       item {
         GroupCard {
-          ClickRow("制作者", "rrena (GitHub: rrenachan)", external = true) {
+          ClickRow("制作者", "rrena (GitHub: rrenachan)", external = true, iconRes = R.drawable.ic_person) {
             context.startActivity(
               Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/rrenachan"))
             )
           }
           GroupDivider()
-          ClickRow("オープンソースライセンス", "オープンソースソフトウェアに関するライセンスの詳細") {
+          ClickRow("オープンソースライセンス", "オープンソースソフトウェアに関するライセンスの詳細", iconRes = R.drawable.ic_description) {
             val intent = Intent(context, MiniBrowserActivity::class.java)
             intent.data = Uri.parse(context.getString(R.string.pref_oss_credits_url))
             context.startActivity(intent)
           }
           GroupDivider()
-          ClickRow("利用規約", "準備中") { /* TODO: 利用規約のページを用意する */ }
+          ClickRow("利用規約", "準備中", iconRes = R.drawable.ic_gavel) { /* TODO: 利用規約のページを用意する */ }
           GroupDivider()
-          ClickRow("プライバシーポリシー", "準備中") { /* TODO: プライバシーポリシーのページを用意する */ }
+          ClickRow("プライバシーポリシー", "準備中", iconRes = R.drawable.ic_shield) { /* TODO: プライバシーポリシーのページを用意する */ }
           GroupDivider()
           InfoRow("現在のバージョン", MozcUtil.getVersionName(context))
         }
@@ -496,11 +514,20 @@ private fun GroupDivider() {
 
 /** 項目自体がボタンになる行。アプリ外に飛ぶ場合は右端に ↗ を表示する。 */
 @Composable
-private fun ClickRow(title: String, description: String?, external: Boolean = false, onClick: () -> Unit) {
+private fun ClickRow(title: String, description: String?, external: Boolean = false, iconRes: Int? = null, onClick: () -> Unit) {
   Row(
     Modifier.fillMaxWidth().clickable(onClick = onClick).padding(16.dp),
     verticalAlignment = Alignment.CenterVertically,
   ) {
+    if (iconRes != null) {
+      Icon(
+        painter = painterResource(iconRes),
+        contentDescription = null,
+        modifier = Modifier.size(24.dp),
+        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+      )
+      Spacer(Modifier.size(16.dp))
+    }
     Column(Modifier.weight(1f)) {
       Text(title, style = MaterialTheme.typography.bodyLarge)
       if (description != null) {
@@ -509,8 +536,12 @@ private fun ClickRow(title: String, description: String?, external: Boolean = fa
       }
     }
     if (external) {
-      Text("↗", style = MaterialTheme.typography.titleLarge,
-        color = MaterialTheme.colorScheme.onSurfaceVariant)
+      Icon(
+        painter = painterResource(R.drawable.ic_open_in_new),
+        contentDescription = "外部リンク",
+        modifier = Modifier.size(20.dp),
+        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+      )
     }
   }
 }
