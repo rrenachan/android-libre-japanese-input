@@ -29,8 +29,9 @@
 package io.github.rrenachan.mozuboard.preference
 
 import android.content.Intent
+import io.github.rrenachan.mozuboard.settings.MozuSettingsActivity
 
 class MozcProxyPreferenceActivity : MozcProxyActivity() {
   override val forwardIntent: Intent
-    get() = Intent(this, MozcMainPreferenceActivity::class.java)
+    get() = Intent(this, MozuSettingsActivity::class.java)
 }

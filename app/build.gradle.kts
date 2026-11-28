@@ -181,6 +181,12 @@ android {
       proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
     }
   }
+  buildFeatures {
+    compose = true
+  }
+  composeOptions {
+    kotlinCompilerExtensionVersion = "1.4.8"
+  }
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
@@ -210,6 +216,13 @@ dependencies {
   implementation("androidx.core:core-ktx:1.12.0")
   implementation("androidx.preference:preference-ktx:1.2.1")
   implementation("com.google.android.material:material:1.10.0")
+  implementation(platform("androidx.compose:compose-bom:2023.08.00"))
+  implementation("androidx.compose.ui:ui")
+  implementation("androidx.compose.ui:ui-tooling-preview")
+  implementation("androidx.compose.material3:material3:1.1.2")
+  implementation("androidx.activity:activity-compose:1.7.2")
+  implementation("androidx.compose.runtime:runtime-livedata")
+  debugImplementation("androidx.compose.ui:ui-tooling")
   implementation("com.google.guava:guava:32.1.3-android")
   implementation("com.google.protobuf:protobuf-javalite:3.8.0")
 

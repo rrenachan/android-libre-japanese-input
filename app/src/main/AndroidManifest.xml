@@ -72,6 +72,9 @@
     <activity android:name="io.github.rrenachan.mozuboard.preference.MozcProxyPreferenceActivity" />
     <activity android:name="io.github.rrenachan.mozuboard.preference.MozcMainPreferenceActivity"
               android:launchMode="singleTask"/>
+    <activity android:name="io.github.rrenachan.mozuboard.settings.MozuSettingsActivity"
+              android:launchMode="singleTask"
+              android:exported="false"/>
     <activity android:name="io.github.rrenachan.mozuboard.preference.MozcSoftwareKeyboardAdvancedPreferenceActivity"
               android:launchMode="singleTop"/>
 

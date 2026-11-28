@@ -35,7 +35,7 @@ import android.inputmethodservice.InputMethodService;
 import android.view.inputmethod.InputConnection;
 import com.google.common.base.Preconditions;
 import io.github.rrenachan.mozuboard.mushroom.MushroomUtil;
-import io.github.rrenachan.mozuboard.preference.MozcMainPreferenceActivity;
+import io.github.rrenachan.mozuboard.settings.MozuSettingsActivity;
 import io.github.rrenachan.mozuboard.ui.MenuDialog.MenuDialogListener;
 
 /** Real implementation of MozcDialogListener. */
@@ -75,7 +75,7 @@ class MozcMenuDialogListenerImpl implements MenuDialogListener {
   @Override
   public void onLaunchPreferenceActivitySelected(Context context) {
     // Launch the preference activity.
-    Intent intent = new Intent(context, MozcMainPreferenceActivity.class);
+    Intent intent = new Intent(context, MozuSettingsActivity.class);
     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     context.startActivity(intent);
   }
